@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentIntroductionBinding
-import com.udacity.shoestore.databinding.FragmentWelcomeBinding
 
 
 /**

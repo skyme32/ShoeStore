@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.MainViewModel
+import com.udacity.shoestore.NavShoesDirections
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.ItemShoeBinding
@@ -27,13 +28,14 @@ class ShoeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        /**
         val binding = DataBindingUtil.inflate<FragmentShoeListBinding>(
             inflater,
             R.layout.fragment_shoe_list,
             container,
             false
-        )
-
+        )**/
+        val binding = FragmentShoeListBinding.inflate(inflater, container, false)
         binding.floatingActionButton.setOnClickListener { view: View ->
             view.findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToDetailShoeFragment(null))
         }
@@ -63,7 +65,14 @@ class ShoeListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.share -> findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
+            R.id.logout -> {
+                /**
+                 * I'm not sure is the best transaction, but works, if you can told me if the best or suggest for this problem,
+                 * before the course i develop some applications add finish on the activity, but now i'm not sure.
+                 * I tried supportfragment, but i can't get works.
+                 */
+                findNavController().navigate(NavShoesDirections.actionToLoginFragment())
+            }
         }
         return super.onOptionsItemSelected(item)
     }

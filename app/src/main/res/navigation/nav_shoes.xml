@@ -58,11 +58,6 @@
             app:enterAnim="@anim/anim_in"
             app:popEnterAnim="@anim/anim_out"
             app:popUpTo="@id/shoeListFragment"/>
-        <action
-            android:id="@+id/action_shoeListFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/anim_in"
-            app:popEnterAnim="@anim/anim_out" />
     </fragment>
     <fragment
         android:id="@+id/detailShoeFragment"
@@ -84,4 +79,11 @@
             app:popUpTo="@id/nav_shoes" />
     </fragment>
 
+
+    <action
+        android:id="@+id/action_to_LoginFragment"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/anim_in"
+        app:popEnterAnim="@anim/anim_out"
+        app:popUpTo="@id/nav_shoes" />
 </navigation>
