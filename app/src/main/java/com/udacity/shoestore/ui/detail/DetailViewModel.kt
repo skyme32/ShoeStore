@@ -1,6 +1,5 @@
 package com.udacity.shoestore.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,12 +17,25 @@ class DetailViewModel : ViewModel() {
     val flagButtonSave: LiveData<Boolean>
         get() = _flagButtonSave
 
+    private val _flagisEdit = MutableLiveData(false)
+    val flagisEdit: LiveData<Boolean>
+        get() = _flagisEdit
+
+
     var shoe = Shoe("", 0.0, "", "")
         get() = field.apply {
             name = title.value!!
             size = sizer.value!!.toDouble()
             company = companiest.value!!
             description = descriptions.value!!
+        }
+        set(value) {
+            title.value = value.name
+            sizer.value = value.size.toString()
+            companiest.value = value.company
+            descriptions.value = value.description
+            _flagisEdit.value = true
+            field = value
         }
 
     fun updateflagButtonSave() {

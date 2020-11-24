@@ -36,7 +36,6 @@
     <string name="hint_description">Description</string>
     <string name="Desc_float_create">Button for create a new Shoe</string>
     <string name="fragment_detail_shoe">Detail shoe</string>
-    <string name="fragment_create_title">Create new Shoe</string>
     <string name="title_shoe">Shoe title</string>
     <string name="size_shoe">43.0</string>
     <string name="company_shoe">Shoe company</string>

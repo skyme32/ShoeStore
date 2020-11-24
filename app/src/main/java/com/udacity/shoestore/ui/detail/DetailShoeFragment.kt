@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import com.udacity.shoestore.MainViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentDetailShoeBinding
-
+import timber.log.Timber
 
 
 class DetailShoeFragment : Fragment() {
@@ -26,12 +26,26 @@ class DetailShoeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentDetailShoeBinding>(inflater, R.layout.fragment_detail_shoe, container, false)
+        val binding = DataBindingUtil.inflate<FragmentDetailShoeBinding>(
+            inflater,
+            R.layout.fragment_detail_shoe,
+            container,
+            false
+        )
 
         // Get the viewmodel
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         binding.detailViewModel = viewModel
         binding.lifecycleOwner = this
+
+        //ARGS shoe to above view
+        val args = DetailShoeFragmentArgs.fromBundle(requireArguments())
+        Timber.i("Edit the shoe: ${args.shoe}")
+        args.shoe.let {
+            if (it != null) {
+                viewModel.shoe = it
+            }
+        }
 
         with(viewModel) {
             val observer = Observer<Any> { viewModel.updateflagButtonSave() }
@@ -41,16 +55,29 @@ class DetailShoeFragment : Fragment() {
             descriptions.observe(viewLifecycleOwner, observer)
         }
 
-        binding.btnCancelDetail.setOnClickListener {view: View ->
-            view.findNavController().navigate(DetailShoeFragmentDirections.actionDetailShoeFragmentToShoeListFragment())
+        binding.btnCancelDetail.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(DetailShoeFragmentDirections.actionDetailShoeFragmentToShoeListFragment())
         }
 
-        binding.btnSaveDetail.setOnClickListener {view: View ->
-            mainViewModel.addShoe(viewModel.shoe)
+        binding.btnDeleteDetail.setOnClickListener { view: View ->
+            mainViewModel.deleteShoe(viewModel.shoe)
+            view.findNavController()
+                .navigate(DetailShoeFragmentDirections.actionDetailShoeFragmentToShoeListFragment())
+        }
+
+        binding.btnSaveDetail.setOnClickListener { view: View ->
+            if (viewModel.flagisEdit.value!!) {
+                mainViewModel.updateShoe(viewModel.shoe)
+            } else {
+                mainViewModel.addShoe(viewModel.shoe)
+            }
+
             view.findNavController()
                 .navigate(DetailShoeFragmentDirections.actionDetailShoeFragmentToShoeListFragment())
         }
 
         return binding.root
     }
+
 }

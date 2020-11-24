@@ -1,17 +1,9 @@
 package com.udacity.shoestore.ui.shoelist
 
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.view.marginLeft
-import androidx.core.view.marginStart
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.MainViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
+import com.udacity.shoestore.databinding.ItemShoeBinding
 import com.udacity.shoestore.models.Shoe
 import timber.log.Timber
 
@@ -42,17 +35,14 @@ class ShoeListFragment : Fragment() {
         )
 
         binding.floatingActionButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToDetailShoeFragment())
+            view.findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToDetailShoeFragment(null))
         }
 
-        viewModel.shoeList.observe(viewLifecycleOwner, Observer {
-            val inflater = binding.linerShoes
-
-            it.forEach { shoe ->
-                Timber.i(shoe.toString())
-                createCardView(shoe, inflater)
+        viewModel.shoeList.observe(viewLifecycleOwner, Observer { shoeList ->
+            shoeList.forEach { shoe ->
+                //Timber.i(shoe.toString())
+                createItem(shoe, binding.linerShoes)
             }
-
         })
 
         setHasOptionsMenu(true)
@@ -78,38 +68,25 @@ class ShoeListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun createCardView(shoe: Shoe, linerShoes: LinearLayout) {
-        val cardLinearLayout = LinearLayout(linerShoes.context)
-        cardLinearLayout.orientation = LinearLayout.VERTICAL
+    private fun createItem(shoeItem: Shoe, linerShoes: LinearLayout) {
+        val inflater = LayoutInflater.from(linerShoes.context)
+        val binding = DataBindingUtil.inflate<ItemShoeBinding>(
+            inflater,
+            R.layout.item_shoe,
+            linerShoes,
+            true
+        )
 
-        val params = RelativeLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
-        params.setMargins(16,16,16,16)
+        with(binding) {
+            shoe = shoeItem
+            root.setOnClickListener(View.OnClickListener { clickInLinearLayout(shoeItem)})
+        }
+    }
 
-        val cardView = CardView(linerShoes.context)
-        cardView.radius = 15f
-        cardView.setContentPadding(16,16,16,16)
-        cardView.layoutParams = params
 
-        val quote = TextView(linerShoes.context)
-        quote.text = shoe.name
-        quote.textSize = 20f
-        quote.setTextColor(Color.parseColor("#000000"))
-
-        val name = TextView(linerShoes.context)
-        name.text = shoe.company
-        name.textSize = 16f
-
-        val desc = TextView(linerShoes.context)
-        desc.text = shoe.description
-        desc.textSize = 14f
-
-        cardLinearLayout.addView(quote)
-        cardLinearLayout.addView(name)
-        cardLinearLayout.addView(desc)
-        cardView.addView(cardLinearLayout)
-        linerShoes.addView(cardView)
+    private fun clickInLinearLayout(shoe: Shoe) {
+        Timber.i(shoe.toString())
+        findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToDetailShoeFragment(shoe))
     }
 
 }

@@ -57,7 +57,7 @@
             app:destination="@id/detailShoeFragment"
             app:enterAnim="@anim/anim_in"
             app:popEnterAnim="@anim/anim_out"
-            app:popUpTo="@id/shoeListFragment" />
+            app:popUpTo="@id/shoeListFragment"/>
         <action
             android:id="@+id/action_shoeListFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -69,6 +69,13 @@
         android:name="com.udacity.shoestore.ui.detail.DetailShoeFragment"
         android:label="@string/fragment_detail_shoe"
         tools:layout="@layout/fragment_detail_shoe">
+
+        <argument
+            android:name="shoe"
+            app:argType="com.udacity.shoestore.models.Shoe"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
         <action
             android:id="@+id/action_detailShoeFragment_to_shoeListFragment"
             app:destination="@id/shoeListFragment"
