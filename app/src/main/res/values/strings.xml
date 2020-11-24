@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Shoe Store</string>
+
+    <!-- Login Fragment-->
+    <string name="title_login">Login Shoe Store</string>
+    <string name="desc_img_login">Icon shoe store</string>
+    <string name="hint_username">Username or Email</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login / Register</string>
+    <string name="create_user">Sign up the username</string>
+
+    <!-- Buttons-->
+    <string name="next">Next</string>
+    <string name="skipe">Skip</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <!-- WELCOME Fragment-->
+    <string name="title_welcome">Welcome to Shoe Store</string>
+    <string name="text_welcome">We have been in the shoe business for over 130 years. Yes, you read that correctly, over a century plus a quarter. Today we are proud to offer our best customer service to patrons both online here at ShoeStores.com and in our shoe stores in the Indianapolis, IN area.</string>
+
+    <!-- INTRUCCIONS Fragment-->
+    <string name="title_intro">Instruction Shoe Store</string>
+    <string name="read_intro">Read shoes list</string>
+    <string name="create_intro">Create new shoes and new prices</string>
+    <string name="edit_intro">Edit shoes and prices</string>
+    <string name="delete_intro">Delete shoes</string>
+    <string name="close_intro">Close the application</string>
+    <string name="icon_info">Icon information</string>
+
+    <!-- DETAIL Fragment-->
+    <string name="hint_name">Name</string>
+    <string name="hint_size">Size</string>
+    <string name="hint_company">Company</string>
+    <string name="hint_description">Description</string>
+    <string name="Desc_float_create">Button for create a new Shoe</string>
+    <string name="fragment_detail_shoe">Detail shoe</string>
+    <string name="fragment_create_title">Create new Shoe</string>
+    <string name="title_shoe">Shoe title</string>
+    <string name="size_shoe">43.0</string>
+    <string name="company_shoe">Shoe company</string>
+    <string name="desc_shoe">Description of shoe</string>
+    <string name="logout">Logout</string>
+
+</resources>

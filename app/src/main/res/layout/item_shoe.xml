@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title_shoe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:text="@{shoe.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/title_shoe" />
+
+            <TextView
+                android:id="@+id/company_shoe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@{shoe.company}"
+                app:layout_constraintBottom_toBottomOf="@+id/size_shoe"
+                app:layout_constraintEnd_toStartOf="@+id/size_shoe"
+                app:layout_constraintStart_toStartOf="@+id/title_shoe"
+                app:layout_constraintTop_toTopOf="@+id/size_shoe"
+                tools:text="@string/company_shoe" />
+
+            <TextView
+                android:id="@+id/size_shoe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="32sp"
+                android:text="@{Double.toString(shoe.size)}"
+                app:layout_constraintEnd_toEndOf="@+id/title_shoe"
+                app:layout_constraintTop_toBottomOf="@+id/title_shoe"
+                tools:text="@string/size_shoe" />
+
+            <TextView
+                android:id="@+id/desc_shoe"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{shoe.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/size_shoe"
+                app:layout_constraintStart_toStartOf="@+id/company_shoe"
+                app:layout_constraintTop_toBottomOf="@+id/size_shoe"
+                tools:text="@string/desc_shoe" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
